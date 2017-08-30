@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="" href="css/estilos.css">
+</head>
+<body>
+    <form id="miForm" action="" method="">
+        <fieldset>
+            <legend><h1>Datos Personales</h1></legend>
+                <input type="text" name="nombre" id="nombre" value="" placeholder="Ingrese nombre">
+                <hr>
+                <input type="text" name="apellido" id="apellido" value="" placeholder="Ingrese apellido">
+                <hr>
+                <label for="masculino">Masculino</label>
+                <input type="radio" name="genero" id="masculino" value="1">
+                <label for="masculino">Femenino</label>  
+                <input type="radio" name="genero" id="femenino" value="0"> 
+                <hr>
+                <select>
+                    <optgroup label="Grupo1">
+                       <option value="">Opcion1</option>
+                           <option value="">Opcion2</option> 
+                           <option value="">Opcion3</option>
+                           <option value="">Opcion4</option>
+                    </optgroup>
+                    <optgroup label ="Grupo2">
+                           <option value="">Opcion5</option>
+                           <option value="">Opcion6</option> 
+                           <option value="">Opcion7</option>
+                           <option value="">Opcion8</option> 
+                    </optgroup>
+                </select>
+                <hr>    
+                <input list="marcas">
+                    <datalist id="marcas" >
+                        <option value="Renault"></option>
+                        <option value="Ford"></option>
+                        <option value="Peugeot"></option>
+                    </datalist>
+                    <hr>
+                    <input type="checkbox" name="interes" value="Informatica" checked>Informatica <br>
+                    <input type="checkbox" name="interes" value="Arte" checked>Arte <br>
+                    <input type="checkbox" name="interes" value="Fisica" checked>Fisica <br>
+                    <hr>
+                    <button type="submit">Submit</button>
+
+                    <input type="text" pattern="[a-zA-Z]{3}">
+            
+        </fieldset>
+    </form>
+    
+</body>
+</html>
