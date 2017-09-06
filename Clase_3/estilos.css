@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+}
+
+h1{
+    background-color: blue;
+    width: 600px;
+    border: 10px;
+}
+
+
+p{
+    background-color: red;
+    border: 100px;
+}
+
+
+span{
+    background-color: yellow;
+}
+
+div
+{
+    background-color: saddlebrown;
+}
