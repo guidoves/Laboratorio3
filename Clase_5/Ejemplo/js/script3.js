@@ -39,7 +39,6 @@ window.addEventListener('load',()=>{
         
                     div.innerHTML = "Error: " + xhr.status + " " + xhr.statusText;
                 }
-                
             }
             else{
                 
