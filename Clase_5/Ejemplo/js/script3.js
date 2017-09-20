@@ -28,7 +28,7 @@ window.addEventListener('load',()=>{
 
     function gestionarRespuesta(){
         
-            var div = document.getElementById('contenedor');
+            var div = document.getElementById('mensaje');
         
             if(xhr.readyState == 4){
                 if(xhr.status == 200){
@@ -40,7 +40,6 @@ window.addEventListener('load',()=>{
                     div.innerHTML = "Error: " + xhr.status + " " + xhr.statusText;
                 }
                 
-        
             }
             else{
                 
