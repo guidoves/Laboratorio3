@@ -1,0 +1,17 @@
+ABM - HTML
+-------------
+Clase animal abstracta
+nombre
+edad
+patas
+------------
+toJson()
+-------------
+Clase mascota extends animal
+id
+tipo-->enum tipoMascota{Perro,Reptil,Ave}
+-------------
+toJson() override
+-------------
+
+Almacenamiento LocalStorage. - String //simil FILE
