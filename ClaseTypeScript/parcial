@@ -15,3 +15,15 @@ toJson() override
 -------------
 
 Almacenamiento LocalStorage. - String //simil FILE
+
+info
+----
+en consola
+npm init // definir package.json
+npm install @types/jquery 
+npm install jquery
+---
+ts
+tsc -init
+tsc carpeta
+tsc --watch
