@@ -1,18 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="js/script.js"></script>
     <title>Document</title>
-    <div>
-        
-    </div>
-
 </head>
+
 <body>
-    
+    <div class="container">
+        <div class="form-group" id="iId">
+            <label for="txtId">Id</label>
+            <input class="form-control col" type="text" id="txtId">
+        </div>
+        <div class="form-group">
+            <label for="txtNombre">Nombre</label>
+            <input class="form-control col" type="text" id="txtNombre">
+        </div>
+        <div class="form-group">
+            <label for="txtEdad">Edad</label>
+            <input class="form-control col" type="text" id="txtEdad">
+        </div>
+        <div>
+            <label for="sTipo">Tipo</label>
+            <select name="" id="sTipo">
+                <option value="PERRO">Perro</option>
+                <option value="GATO">Gato</option>
+                <option value="ROEDOR">Roedor</option>
+                <option value="AVE">Ave</option>
+                <option value="PEZ">Pez</option>
+            </select>
+        </div>
+        <div>
+            <label for="sPatas">Cantidad de patas</label>
+            <select name="" id="sPatas">
+                <option value="2">2</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <button class="btn btn-success" id="btnAgregar">Agregar Mascota</button>
+        <hr>
+        <div>
+            <label for="sFiltro">Filtro</label>
+            <select name="" id="sFiltro">
+                <option value="PERRO">Perro</option>
+                <option value="GATO">Gato</option>
+                <option value="ROEDOR">Roedor</option>
+                <option value="AVE">Ave</option>
+                <option value="PEZ">Pez</option>
+            </select>
+        </div>
+        <div>
+            <h1>Mascotas</h1>
+            <label for="">Id:
+                <input type="checkbox" name="Id" id="">
+            </label>
+            <label for="">Nombre:
+                <input type="checkbox" name="Nombre" id="">
+            </label>
+            <label for="">Edad:
+                <input type="checkbox" name="Edad" id="">
+            </label>
+            <label for="">Patas:
+                <input type="checkbox" name="Patas" id="">
+            </label>
+        </div>
+        <hr>
+        <div id="tabla">
+        </div>
+    </div>
 </body>
+
 </html>
