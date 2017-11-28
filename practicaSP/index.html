@@ -47,7 +47,8 @@
         <hr>
         <div>
             <label for="sFiltro">Filtro</label>
-            <select name="" id="sFiltro">
+            <select name="" id="sFiltro" onchange="Filtro()">
+                <option value="TODOS">Todos</option>
                 <option value="PERRO">Perro</option>
                 <option value="GATO">Gato</option>
                 <option value="ROEDOR">Roedor</option>
@@ -58,16 +59,16 @@
         <div>
             <h1>Mascotas</h1>
             <label for="">Id:
-                <input type="checkbox" name="Id" id="">
+                <input type="checkbox" value="id" id="chkId" onclick="Filtro2()">
             </label>
             <label for="">Nombre:
-                <input type="checkbox" name="Nombre" id="">
+                <input type="checkbox" value="nombre" id="chkNombre">
             </label>
             <label for="">Edad:
-                <input type="checkbox" name="Edad" id="">
+                <input type="checkbox" value="edad" id="chkEdad">
             </label>
             <label for="">Patas:
-                <input type="checkbox" name="Patas" id="">
+                <input type="checkbox" value="patas" id="chkPatas">
             </label>
         </div>
         <hr>

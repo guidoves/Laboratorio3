@@ -77,6 +77,8 @@ function LimpiarForm() {
     $('#txtId').val('');
     $('#txtsPatas').val(0);
     $('#txtsTipo').val(0);
+}
+function RestablecerForm() {
     $("#btnAgregar").html('Agregar Mascota');
     $("#btnAgregar").on('click', AgregarAnimal);
     $('#txtId').removeAttr('disabled');
@@ -140,11 +142,44 @@ function Modificar(id) {
                 dataJson[index]['tipo'] = $("#sTipo").val();
                 localStorage.setItem('data', JSON.stringify(dataJson));
                 LimpiarForm();
+                RestablecerForm();
                 ObtenerData();
             });
         }
     };
     for (var index = 0; index < dataJson.length; index++) {
         _loop_1(index);
+    }
+}
+function Filtro() {
+    var data = localStorage.getItem('data');
+    if (data != null) {
+        var dataJson = JSON.parse(data);
+        var filtro_1 = $("#sFiltro").val();
+        if (filtro_1 == "TODOS") {
+            ObtenerData();
+        }
+        else {
+            var dataFiltrada = dataJson.filter(function (data) {
+                return data["tipo"] == filtro_1;
+            });
+            ArmarTabla(dataFiltrada);
+        }
+        //console.log(dataFiltrada);
+        //console.log(dataReduce); 
+    }
+}
+function Filtro2() {
+    var data = localStorage.getItem('data');
+    if (data != null) {
+        var dataJson = JSON.parse(data);
+        var dataFiltrada = [];
+        if ($('#chkId').is(':checked')) {
+            dataFiltrada.push(dataJson.filter(function (data) {
+                return data["id"];
+            }));
+        }
+        console.log(dataFiltrada);
+        ArmarTabla(dataFiltrada);
     }
 }
