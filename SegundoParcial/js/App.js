@@ -3,6 +3,7 @@
 $(document).ready(function () {
     $("#btnAgregar").on('click', Alta);
     CargarDatos();
+    Filtro2();
 });
 var imagen = '';
 function Alta() {
@@ -115,6 +116,19 @@ function ActualizarTabla(empleados) {
     html += "</tbody></table>";
     $("#tabla").html(html);
 }
+/*function ActualizarTabla2(empleados: any[]) {
+
+    $("#tabla").html("");
+    let html = "<table class='table'><thead><th class ='hLegajo'>Legajo</th><th class ='hNombre'>Nombre</th><th class ='hApellido'>Apellido</th><th class ='hEdad'>Edad</th><th class ='hFoto'>Foto</th></thead><tbody>";
+
+    for (let index = 0; index < empleados.length; index++) {
+
+        html += "<tr><td class='hLegajo'>" + empleados[index].legajo + "</td><td class ='hNombre'>" + empleados[index].nombre + "</td><td class ='hApellido'>" + empleados[index].apellido + "</td><td class ='hEdad'>" + empleados[index]["edad"] + "</td><td class ='hFoto'><img width='30' height='30' src='" + empleados[index]["foto"] + "'></td><td><button class='btn btn-warning' onclick='Modificar(" + empleados[index]["legajo"] + ")'>Modificar</button><button class='btn btn-danger' onclick='Borrar(" + empleados[index]["legajo"] + ")'>Borrar</button></td></tr>";
+    }
+
+    html += "</tbody></table>";
+    $("#tabla").html(html);
+}*/
 function TraerImagen() {
     var file = $("#txtFoto").prop('files');
     var retorno;
@@ -186,6 +200,36 @@ function Filtro() {
                 break;
             }
     }
+}
+function Filtro2() {
+    var empleados = TraerData();
+    var resultado = new Object();
+    if ($('#chkLegajo').prop('checked')) {
+        resultado.legajo = empleados.map(function (empleado) {
+            return empleado['legajo'];
+        });
+    }
+    if ($('#chkNombre').prop('checked')) {
+        resultado.nombre = empleados.map(function (empleado) {
+            return empleado['nombre'];
+        });
+    }
+    if ($('#chkApellido').prop('checked')) {
+        resultado.apellido = empleados.map(function (empleado) {
+            return empleado['apellido'];
+        });
+    }
+    if ($('#chkEdad').prop('checked')) {
+        resultado.edad = empleados.map(function (empleado) {
+            return empleado['edad'];
+        });
+    }
+    if ($('#chkFoto').prop('checked')) {
+        resultado.foto = empleados.map(function (empleado) {
+            return empleado['foto'];
+        });
+    }
+    //ActualizarTabla2(resultado);
 }
 function Metricas() {
     var empleados = TraerData();
