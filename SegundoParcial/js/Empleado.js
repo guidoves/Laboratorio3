@@ -14,10 +14,11 @@ var Sp;
 (function (Sp) {
     var Empleado = /** @class */ (function (_super) {
         __extends(Empleado, _super);
-        function Empleado(nombre, apellido, edad, legajo, foto) {
-            var _this = _super.call(this, nombre, apellido, edad) || this;
+        function Empleado(nombre, apellido, edad, legajo, foto, id, sexo) {
+            var _this = _super.call(this, nombre, apellido, edad, sexo) || this;
             _this.legajo = legajo;
             _this.foto = foto;
+            _this.id = id;
             return _this;
         }
         Empleado.prototype.toJson = function () {

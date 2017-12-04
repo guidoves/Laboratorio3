@@ -5,12 +5,14 @@ namespace Sp {
 
         public legajo: number;
         public foto: string;
+        public id:number;
 
-        constructor(nombre: string, apellido: string, edad: number, legajo: number, foto: string) {
-            super(nombre, apellido, edad);
+        constructor(nombre: string, apellido: string, edad: number, legajo: number, foto: string,id:number,sexo:string) {
+            super(nombre, apellido, edad, sexo);
 
             this.legajo = legajo;
             this.foto = foto;
+            this.id = id;
         }
 
         toJson(): string {
