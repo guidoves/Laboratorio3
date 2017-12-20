@@ -363,3 +363,68 @@ function CalcularEdad(fecha) {
     }
     return edad;
 }
+function Filtro2() {
+    var filtro = $('#sFiltro').val();
+    var data = TraerData();
+    switch (filtro) {
+        case 'TODOS':
+            {
+                Metricas(data);
+                break;
+            }
+        case 'ACTIVOS':
+            {
+                var dataFil = data.filter(function (empleado) {
+                    return empleado.estado == 'ACTIVO';
+                });
+                Metricas(dataFil);
+                break;
+            }
+        case 'BAJA':
+            {
+                var dataFil = data.filter(function (empleado) {
+                    return empleado.estado == 'BAJA';
+                });
+                Metricas(dataFil);
+                break;
+            }
+    }
+}
+function Metricas(data) {
+    //let empleados = TraerData();
+    var sumEdad = data.reduce(function (anterior, actual) {
+        return anterior + actual.edad;
+    }, 0);
+    var hombres = data.filter(function (empleado) {
+        return empleado.sexo == 'Masculino';
+    });
+    var mujeres = data.filter(function (empleado) {
+        return empleado.sexo == 'Femenino';
+    });
+    if (data.length != 0) {
+        $("#mCantidad").val(data.length);
+        $("#mPromedio").val(sumEdad / data.length);
+        $("#mHombres").val(hombres.length);
+        $("#mMujeres").val(mujeres.length);
+    }
+    else {
+        $("#mCantidad").val(0);
+        $("#mPromedio").val(0);
+        $("#Hombres").val(0);
+        $("#Mujeres").val(0);
+    }
+}
+function AltaAjax() {
+    var type = 'POST';
+    var contentType = '';
+    var data;
+    var dataType;
+    var url;
+    $.ajax({
+        url: url,
+        type: type,
+        data: dataType,
+        success: function () {
+        }
+    });
+}

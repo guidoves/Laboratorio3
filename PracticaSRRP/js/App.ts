@@ -375,16 +375,40 @@ function Metricas(data:any[]) {
     let sumEdad = data.reduce(function(anterior,actual){
         return anterior + actual.edad;
     },0);
-    if (data.length != 0) {
+    let hombres:any[] = data.filter(function(empleado){
+        return empleado.sexo == 'Masculino';
+    });
+    let mujeres:any[] = data.filter(function(empleado){
+        return empleado.sexo == 'Femenino';
+    })
 
-        for (let index = 0; index < data.length; index++) {
-            sumEdad += Number(data[index].edad);
-        }
+    if (data.length != 0) {
         $("#mCantidad").val(data.length);
-        $("#mPromedio").val(sumEdad / data.length);
+        $("#mPromedio").val(sumEdad/data.length);
+        $("#mHombres").val(hombres.length);
+        $("#mMujeres").val(mujeres.length);
     }
     else {
         $("#mCantidad").val(0);
         $("#mPromedio").val(0);
+        $("#Hombres").val(0);
+        $("#Mujeres").val(0);
     }
+}
+
+function AltaAjax(){
+    let type = 'POST';
+    let contentType = '';
+    let data;
+    let dataType;
+    let url;
+    
+    $.ajax({
+        url: url,
+        type: type,
+        data : dataType,
+        success: function(){
+
+        }
+    });
 }
