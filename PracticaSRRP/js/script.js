@@ -67,6 +67,14 @@ $(document).ready(function () {
         $("#modificarBody").html('');
         $("#modificarBusqueda").val('');
     });
+    $('#btnEstadisticasCerrar').on('click', function () {
+        var sFiltro = $('#sFiltro');
+        sFiltro.val($('option:first', sFiltro).val());
+        $("#mCantidad").val(0);
+        $("#mPromedio").val(0);
+        $("#mHombres").val(0);
+        $("#mMujeres").val(0);
+    });
     CargarDatos();
 });
 var imagen = '';
@@ -81,10 +89,10 @@ function Alta() {
     var apellido = String($('#txtApellido').val());
     var dni = Number($('#txtDni').val());
     var fNacimiento = String($('#txtFecha').val());
-    var sexo = String($('#txtSexo').val());
+    var sexo = String($('input:radio[name=txtSexo]:checked').val());
     var direccion = String($('#txtDireccion').val());
     var telefono = String($('#txtTelefono').val());
-    var estadoCivil = String($('#txtEstadoCivil').val());
+    var estadoCivil = String($('input:radio[name=txtEstadoCivil]:checked').val());
     var foto = imagen;
     var legajo = EstablecerLegajo();
     var cuil = String($('#txtCuil').val());
@@ -106,11 +114,11 @@ function Modificar(legajo) {
     var fNacimiento = $('#mdFecha').val();
     var direccion = $('#mdDireccion').val();
     var telefono = $('#mdTelefono').val();
-    var sexo = $('#mdSexo').val();
-    var estadoCivil = $('#mdEstadoCivil').val();
+    var sexo = String($('input:radio[name=mdSexo]:checked').val());
+    var estadoCivil = String($('input:radio[name=mdEstadoCivil]:checked').val());
     var cuil = $('#mdCuil').val();
     var ingreso = $('#mdIngreso').val();
-    var foto = $('#mdFoto').val();
+    var foto = imagen;
     for (var index = 0; index < empleados.length; index++) {
         if (empleados[index].legajo == legajo) {
             empleados[index].apellido = String(apellido);
@@ -208,7 +216,7 @@ function ModificarModal() {
             '<label for="">Estado Civil</label><div class="radio"><label><input type="radio" id="mdEstadoCivil" name="mdEstadoCivil" value="Soltero" checked>Soltero</label></div><div class="radio"><label><input type="radio" id="mdEstadoCivil" name="mdEstadoCivil" value="Casado">Casado</label></div>' +
             '<div class="form-group"><input value="' + empleado[0].cuil + '" class="form-control" type="text" id="mdCuil" placeholder="Cuil" required/></div>' +
             '<div class="form-group"><label for="mdIngreso">Fecha de Ingreso</label><input value="' + empleado[0].ingreso + '" class="form-control" type="date" id="mdIngreso" required/></div>' +
-            '<div><hr><div class="form-group"><label for="mdFoto">Foto</label><input type="file" accept="image/*" name="" id="mdFoto" onchange="TraerImagen()" required/></div>' +
+            '<div><hr><div class="form-group"><label for="mdFoto">Foto</label><input type="file" accept="image/*" name="" id="mdFoto" onchange="TraerImagenM()" required/></div>' +
             '<input class="btn btn-success" type="submit" value="Modificar Empleado"></div></form>';
         $('#modificarBody').html(html);
     }
@@ -258,7 +266,20 @@ function TraerActivos() {
     return activos;
 }
 function TraerImagen() {
-    var file = $("#txtFoto").prop('files');
+    var file = $('#txtFoto').prop('files');
+    var retorno;
+    if (file.length > 0) {
+        var fileToLoad = file[0];
+        var fileReader = new FileReader();
+        fileReader.onload = function (fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result;
+            imagen = srcData;
+        };
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+function TraerImagenM() {
+    var file = $('#mdFoto').prop('files');
     var retorno;
     if (file.length > 0) {
         var fileToLoad = file[0];
@@ -410,8 +431,8 @@ function Metricas(data) {
     else {
         $("#mCantidad").val(0);
         $("#mPromedio").val(0);
-        $("#Hombres").val(0);
-        $("#Mujeres").val(0);
+        $("#mHombres").val(0);
+        $("#mMujeres").val(0);
     }
 }
 function AltaAjax() {

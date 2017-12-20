@@ -11,8 +11,17 @@ $(document).ready(function () {
     $('#btnModificarCerrar').on('click', function () {
         $("#modificarBody").html('');
         $("#modificarBusqueda").val('');
-    })
+    });
+    $('#btnEstadisticasCerrar').on('click',function(){
+        let sFiltro = $('#sFiltro');
+        sFiltro.val($('option:first',sFiltro).val());
+        $("#mCantidad").val(0);
+        $("#mPromedio").val(0);
+        $("#mHombres").val(0);
+        $("#mMujeres").val(0);    
+    });
     CargarDatos();
+
 
 });
 
@@ -32,10 +41,10 @@ function Alta() {
     let apellido: string = String($('#txtApellido').val());
     let dni: number = Number($('#txtDni').val());
     let fNacimiento: string = String($('#txtFecha').val());
-    let sexo: string = String($('#txtSexo').val());
+    let sexo: string = String($('input:radio[name=txtSexo]:checked').val());
     let direccion: string = String($('#txtDireccion').val());
     let telefono: string = String($('#txtTelefono').val());
-    let estadoCivil: string = String($('#txtEstadoCivil').val());
+    let estadoCivil: string = String($('input:radio[name=txtEstadoCivil]:checked').val());
     let foto: string = imagen;
     let legajo: number = EstablecerLegajo();
     let cuil: string = String($('#txtCuil').val());
@@ -58,11 +67,11 @@ function Modificar(legajo: number) {
     let fNacimiento = $('#mdFecha').val();
     let direccion = $('#mdDireccion').val();
     let telefono = $('#mdTelefono').val();
-    let sexo = $('#mdSexo').val();
-    let estadoCivil = $('#mdEstadoCivil').val();
+    let sexo = String($('input:radio[name=mdSexo]:checked').val());
+    let estadoCivil = String($('input:radio[name=mdEstadoCivil]:checked').val());
     let cuil = $('#mdCuil').val();
     let ingreso = $('#mdIngreso').val();
-    let foto = $('#mdFoto').val();
+    let foto = imagen;
     for (let index = 0; index < empleados.length; index++) {
         if (empleados[index].legajo == legajo) {
             empleados[index].apellido = String(apellido);
@@ -156,6 +165,7 @@ function ModificarModal() {
     let busqueda = $('#modificarBusqueda').val();
     let empleado: proyecto.Empleado[] = BuscarPorLegajo(Number(busqueda));
     if (empleado.length > 0) {
+
         let html = '<form id="frmModificar" onsubmit="Modificar(' + empleado[0].legajo + ')">' +
             '<div class="form-group"><input value="' + empleado[0].nombre + '" class="form-control" type="text" id="mdNombre" placeholder="Nombre" required/></div>' +
             '<div class="form-group"><input value="' + empleado[0].apellido + '" class="form-control" type="text" id="mdApellido" placeholder="Apellido" required/></div>' +
@@ -167,7 +177,7 @@ function ModificarModal() {
             '<label for="">Estado Civil</label><div class="radio"><label><input type="radio" id="mdEstadoCivil" name="mdEstadoCivil" value="Soltero" checked>Soltero</label></div><div class="radio"><label><input type="radio" id="mdEstadoCivil" name="mdEstadoCivil" value="Casado">Casado</label></div>' +
             '<div class="form-group"><input value="' + empleado[0].cuil + '" class="form-control" type="text" id="mdCuil" placeholder="Cuil" required/></div>' +
             '<div class="form-group"><label for="mdIngreso">Fecha de Ingreso</label><input value="' + empleado[0].ingreso + '" class="form-control" type="date" id="mdIngreso" required/></div>' +
-            '<div><hr><div class="form-group"><label for="mdFoto">Foto</label><input type="file" accept="image/*" name="" id="mdFoto" onchange="TraerImagen()" required/></div>' +
+            '<div><hr><div class="form-group"><label for="mdFoto">Foto</label><input type="file" accept="image/*" name="" id="mdFoto" onchange="TraerImagenM()" required/></div>' +
             '<input class="btn btn-success" type="submit" value="Modificar Empleado"></div></form>';
         $('#modificarBody').html(html);
     }
@@ -226,7 +236,21 @@ function TraerActivos(): proyecto.Empleado[] {
 }
 
 function TraerImagen() {
-    let file = $("#txtFoto").prop('files');
+    let file = $('#txtFoto').prop('files');
+    let retorno;
+    if (file.length > 0) {
+        let fileToLoad = file[0];
+        let fileReader = new FileReader();
+        fileReader.onload = function (fileLoadedEvent) {
+            let srcData = fileLoadedEvent.target.result;
+            imagen = srcData;
+        }
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+
+function TraerImagenM() {
+    let file = $('#mdFoto').prop('files');
     let retorno;
     if (file.length > 0) {
         let fileToLoad = file[0];
@@ -391,8 +415,8 @@ function Metricas(data:any[]) {
     else {
         $("#mCantidad").val(0);
         $("#mPromedio").val(0);
-        $("#Hombres").val(0);
-        $("#Mujeres").val(0);
+        $("#mHombres").val(0);
+        $("#mMujeres").val(0);
     }
 }
 
