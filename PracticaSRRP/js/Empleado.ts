@@ -6,12 +6,16 @@ namespace proyecto{
         public ingreso:string;
         public egreso:string;
         public estado:string;
+        public pais:string;
+        public provincia:string;
 
-        constructor(nombre:string, apellido:string, dni:number, fNacimiento:string, sexo:string, direccion:string, telefono:string, estadoCivil:string,foto:string, legajo:number, cuil:string, ingreso:string, egreso?:string, estado?:string){
+        constructor(nombre:string, apellido:string, dni:number, fNacimiento:string, sexo:string, direccion:string, telefono:string, estadoCivil:string,foto:string, legajo:number, cuil:string, ingreso:string,pais:string,provincia:string, egreso?:string, estado?:string){
             super(nombre,apellido,dni,fNacimiento,sexo,direccion,telefono,estadoCivil,foto);
             this.cuil = cuil;
             this.ingreso = ingreso;
             this.legajo = legajo;
+            this.pais = pais;
+            this.provincia = provincia;
             if(estado == undefined){
                 this.estado = 'ACTIVO';
             }
