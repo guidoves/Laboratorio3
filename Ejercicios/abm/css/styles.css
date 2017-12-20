@@ -1,0 +1,30 @@
+header h1{
+    color: blue;
+    text-align: center;
+}
+
+label{
+    
+    
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.contenedor input{
+
+    width: 50%;
+}
+
+.contenedor .enviar{
+
+    width: 5%;
+    background-color: rgb(10, 219, 17); /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    
+}
