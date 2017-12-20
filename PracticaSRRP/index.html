@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+    <title>Registro de Empleados</title>
+</head>
+
+<body style="background-image:url('img/fondo.jpg')">
+    <div id='principal' class='container'>
+        <header>
+            <nav class='navbar navbar-inverse'>
+                <div>
+                    <img src="img/utn.png" height="40" width="40" align='left'>
+                    <a class='navbar-brand' href="#">Registro Empleados</a>
+                </div>
+                <div class='navbar-header'>
+                </div>
+                <ul class='nav navbar-nav'>
+                    <li class='dropdown'>
+                        <a class='dropdown-toggle' data-toggle='dropdown' href="">Empleados
+                            <span class='caret'></span>
+                        </a>
+                        <ul class='dropdown-menu'>
+                            <li>
+                                <a href="" data-toggle='modal' data-target='#alta'>Alta Empleado</a>
+                            </li>
+                            <li>
+                                <a href="" data-toggle='modal' data-target='#baja'>Baja Empleado</a>
+                            </li>
+                            <li>
+                                <a href="" data-toggle='modal' data-target='#modificar'>Modificar Empleado</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class='dropdown'>
+                        <a data-toggle='modal' data-target='#estadisticas' href="">Estadisticas</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <div>
+                <h3>Filtro</h3>
+                <label for="">Legajo:
+                    <input type="checkbox" value="legajo" id="chkLegajo" checked='true' onchange="Filtro()">
+                </label>
+                &nbsp
+                <label for="">Nombre:
+                    <input type="checkbox" value="nombre" id="chkNombre" checked='true' onchange="Filtro()">
+                </label>
+                &nbsp
+                <label for="">Apellido:
+                    <input type="checkbox" value="apellido" id="chkApellido" checked='true' onchange="Filtro()">
+                </label>
+                &nbsp
+                <label for="">Dni:
+                    <input type="checkbox" value="foto" id="chkDni" checked='true' onchange="Filtro()">
+                </label>
+                <br>
+            </div>
+            <h3>Base de Empleados</h3>
+            <div id='tabla'>
+                <table class='table table-hover'>
+                    <div class='alert alert-info'>
+                        <strong>No hay datos</strong>
+                    </div>
+                </table>
+            </div>
+        </section>
+        <div id='alta' class='modal fade' role='dialog'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h4 class='modal-title'>Alta Empleado</h4>
+                    </div>
+                    <div class='modal-body'>
+                        <form id='frmAlta' onsubmit="Alta()">
+                            <div class='form-group'>
+                                <input class='form-control' type="text" id='txtNombre' placeholder="Nombre" pattern="/^[a-zA-ZÑñáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ\s]{0,49}+$/"
+                                    required/>
+                            </div>
+                            <div class='form-group'>
+                                <input class='form-control' type="text" id='txtApellido' placeholder="Apellido" required/>
+                            </div>
+                            <div class='form-group'>
+                                <input class='form-control' type="text" id='txtDni' placeholder="Dni" required/>
+                            </div>
+                            <div class='form-group'>
+                                <label for="txtFecha">Fecha de Nacimiento</label>
+                                <input class='form-control' type="date" id='txtFecha' required/>
+                            </div>
+                            <div class='form-group'>
+                                <input class='form-control' type="txt" id='txtDireccion' placeholder="Direccion" required/>
+                            </div>
+                            <div class='form-group'>
+
+                                <input class='form-control' type="tel" id='txtTelefono' placeholder="Telefono" required/>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id='txtSexo' name='txtSexo' value="Masculino" checked>Masculino</label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id='txtSexo' name='txtSexo' value="Femenino">Femenino</label>
+                            </div>
+                            <hr>
+                            <label for="">Estado Civil</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id='txtEstadoCivil' name='txtEstadoCivil' value="Soltero" checked>Soltero</label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" id='txtEstadoCivil' name='txtEstadoCivil' value="Casado">Casado</label>
+                            </div>
+                            <div class='form-group'>
+                                <input class='form-control' type="text" id='txtCuil' placeholder="Cuil" pattern="/^[a-zA-ZÑñáéíóúÁÉÍÓÚäëïöüÄËÏÖÜàèìòùÀÈÌÒÙ\s]{0,49}+$/"
+                                    required/>
+                            </div>
+                            <div class='form-group'>
+                                <label for="txtIngreso">Fecha de Ingreso</label>
+                                <input class='form-control' type="date" id='txtIngreso' required/>
+                            </div>
+                            <div>
+                                <hr>
+                                <div class='form-group'>
+                                    <label for="txtFoto">Foto</label>
+                                    <input type="file" accept='image/*' name="" id="txtFoto" onchange="TraerImagen()" required/>
+                                </div>
+                                <input class="btn btn-success" type="submit" value="Alta Empleado">
+                            </div>
+                        </form>
+                    </div>
+                    <div class='modal-footer'>
+                        <button id='btnAltaCerrar' type="button" class='btn btn-info' data-dismiss='modal'>Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='ver' class='modal fade' role='dialog'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type="button" class='close' data-dismiss='modal'>&times;</button>
+                        <h4 class='modal-title'>Detalle</h4>
+                    </div>
+                    <div id='verBody' class='modal-body'>
+                    </div>
+                    <div class='modal-footer'>
+                        <button type="button" class='btn btn-info' data-dismiss='modal'>Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='baja' class='modal fade' role='dialog'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h4 class='modal-title'>Baja Empleado</h4>
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input id='bajaBusqueda' type="text" class="form-control" placeholder="Buscar por Legajo">
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="BajaModal()">Enviar</button>
+                        </form>
+                    </div>
+                    <div id='bajaBody' class='modal-body'>
+
+                    </div>
+                    <div class='modal-footer'>
+                        <button id='btnBajaCerrar' type="button" class='btn btn-info' data-dismiss='modal'>Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='modificar' class='modal fade' role='dialog'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h4 class='modal-title'>Modificar Empleado</h4>
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input id='modificarBusqueda' type="text" class="form-control" placeholder="Buscar por Legajo">
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="ModificarModal()">Enviar</button>
+                        </form>
+                    </div>
+                    <div id='modificarBody' class='modal-body'>
+
+                    </div>
+                    <div class='modal-footer'>
+                        <button id='btnModificarCerrar' type="button" class='btn btn-info' data-dismiss='modal'>Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='estadisticas' class='modal fade' role='dialog'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type="button" class='close' data-dismiss='modal'>&times;</button>
+                        <h4 class='modal-title'>Estadisticas</h4>
+                    </div>
+                    <div class='modal-body'>
+                        <label for="sFiltro">Mostrar</label>
+                        <select name="" id="sFiltro" onchange="Filtro2()">
+                            <option value="TODOS">Todos</option>
+                            <option value="ACTIVOS">Activos</option>
+                            <option value="BAJA">Dados de baja</option>
+                        </select>
+                        <br>
+                        <label for="">Cantidad de empleados: </label>
+                        <input type="text" readonly='true' id='mCantidad'>
+                        <br>
+                        <label for="">Promedio de edad de los empleados: </label>
+                        <input type="text" readonly='true' id='mPromedio'>
+                        <br>
+                        <label for="">Empleados Hombres: </label>
+                        <input type="text" readonly='true' id='mHombres'>
+                        <br>
+                        <label for="">Empleados Mujeres: </label>
+                        <input type="text" readonly='true' id='mMujeres'>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='confirmarBaja' class='modal fade' role='dialog'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type="button" class='close' data-dismiss='modal'>&times;</button>
+                        <h4 class='modal-title'>Baja de Empleado</h4>
+                    </div>
+                    <div id='confirmarBody' class='modal-body'>
+                        <form>
+                            <div class='form-group'>
+                                <label for="txtEgreso"></label>Ingrese fecha de Egreso</label>
+                                <input class='form-control' type="date" id='txtEgreso' required/>
+                            </div>
+                        </form>
+                    </div>
+                    <div id='confirmarFooter' class="modal-footer">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</body>
+</div>
+
+</html>
